@@ -4,19 +4,39 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Charity: Water</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    /* Use Montserrat as a Proxima Nova alternative for buttons and major text */
+    /* Use Nunito as an Avenir alternative for all other text */
+
+    body {
+      font-family: 'Nunito', Arial, sans-serif; /* Avenir alternative for general text */
+      line-height: 1.6;
+      background-color: #f8f9fa;
+      color: #222;
+    }
+
+    /* Major text styles (headings, stat numbers, etc.) */
+    h1, h2, h3, h4, h5, h6,
+    .stat-box strong,
+    .project-box p:first-child,
+    .highlight div:first-child,
+    .header-right nav a,
+    .stat-box button,
+    .give-button,
+    .donate-form button {
+      font-family: 'Montserrat', Arial, sans-serif; /* Proxima Nova alternative */
+    }
+
+    /* All other text uses Nunito (Avenir alternative) */
+    p, span, label, input, .stat-box, .project-box, .highlight {
+      font-family: 'Nunito', Arial, sans-serif;
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      background-color: #f8f9fa;
-      color: #222;
     }
 
     header {
@@ -26,22 +46,81 @@
       padding: 1.5rem 2rem;
       background: white;
       border-bottom: 1px solid #ddd;
+      position: relative; /* For positioning the mobile menu */
     }
 
-    header nav a {
-      margin: 0 1rem;
+    /* Mobile menu button - hidden by default */
+    .menu-button {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    /* Mobile navigation menu - hidden by default */
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      border-bottom: 1px solid #ddd;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+
+    /* Mobile nav links styling */
+    .mobile-nav a {
+      display: block;
+      padding: 1rem 2rem;
       text-decoration: none;
       color: #222;
       font-weight: 500;
+      border-bottom: 1px solid #eee;
+    }
+
+    .mobile-nav a:hover {
+      background-color: #f8f9fa;
+    }
+
+    /* Show mobile menu when active */
+    .mobile-nav.active {
+      display: block;
+    }
+
+    /* New: group nav and button to the right */
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem; /* space between nav and button */
+      margin-left: auto;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem; /* space between nav links */
+    }
+
+    header nav a {
+      text-decoration: underline; /* underline nav links */
+      color: #222;
+      font-weight: 500;
+      padding: 0.25rem 0.5rem;
     }
 
     header .give-button {
-      background-color: #b7dbe8;
+      background-color: #70b7ce;
+      color: white;
       border: none;
       padding: 0.5rem 1rem;
       border-radius: 5px;
       font-weight: bold;
       cursor: pointer;
+      margin-left: 1rem;
+      text-decoration: none; /* no underline for Give button */
     }
 
     .hero {
@@ -49,12 +128,80 @@
       flex-wrap: wrap;
       padding: 2rem;
       background-color: #e0e7eb;
+      min-height: 100vh; /* Ensure the hero section takes up at least the full viewport height */
+      padding-bottom: 4rem; /* Add extra padding at the bottom to extend beyond content */
+    }
+
+    /* Hero image styling - make it fill its area */
+    .hero-image img {
+      width: 100%;           /* Fill the width of the area */
+      height: 100%;          /* Fill the height of the area */
+      max-width: none;       /* Remove max-width limit for larger display */
+      max-height: none;      /* Remove max-height limit for larger display */
+      border-radius: 8px;    /* Rounded corners */
+      display: block;        /* Remove extra space below image */
+      object-fit: cover;     /* Fill the area while maintaining aspect ratio */
+    }
+
+    /* Mobile hero image container - positioned after paragraph */
+    .hero-image-mobile {
+      display: none; /* Hidden by default on desktop */
+      width: 100%;
+      margin: 1rem 0;
+      text-align: center;
+    }
+
+    .hero-image-mobile img {
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+
+    /* On tablets, adjust max size */
+    @media (max-width: 1024px) {
+      .hero-text,
+      .hero-image {
+        min-width: 220px;
+      }
+      .hero-image img {
+        max-width: 320px;
+        max-height: 320px;
+      }
+    }
+
+    /* On mobile, stack vertically and adjust image size */
+    @media (max-width: 599px) {
+      .hero {
+        flex-direction: column;
+        padding: 1rem;
+      }
+      .hero-text,
+      .hero-image {
+        width: 100%;
+        min-width: 0;
+        align-items: center;
+        justify-content: center;
+      }
+      .hero-image img {
+        max-width: 220px;
+        max-height: 220px;
+      }
     }
 
     .hero-text {
       flex: 1;
       min-width: 300px;
       padding-right: 2rem;
+    }
+
+    .hero-image {
+      flex: 1;
+      min-width: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .hero-text h1 {
@@ -69,12 +216,15 @@
       color: #444;
     }
 
+    /* Make the text entry box larger */
     .donate-form input[type="text"] {
       padding: 0.5rem;
-      width: 70%;
+      width: 90%; /* increased width */
+      max-width: 350px; /* optional: limit max width */
       margin-right: 0.5rem;
       border: 1px solid #ccc;
       border-radius: 4px;
+      font-size: 1rem;
     }
 
     .donate-form button {
@@ -89,8 +239,8 @@
     .stats {
       display: flex;
       flex-wrap: wrap;
-      margin-top: 2rem;
       gap: 1rem;
+            margin-top: 16px;
     }
 
     .stat-box {
@@ -100,8 +250,10 @@
       box-shadow: 0 0 5px rgba(0,0,0,0.05);
       flex: 1;
       min-width: 200px;
+      /* Add margi-top of 16px */
     }
 
+    /* Evenly space all items in the project box */
     .project-box {
       text-align: center;
       background: white;
@@ -110,6 +262,11 @@
       box-shadow: 0 0 5px rgba(0,0,0,0.05);
       flex: 1;
       min-width: 200px;
+      display: flex;                /* Use flexbox for layout */
+      flex-direction: column;       /* Stack items vertically */
+      justify-content: space-between; /* Evenly space items vertically */
+      align-items: center;          /* Center items horizontally */
+      height: 100%;                 /* Make the box fill available height */
     }
 
     .highlight {
@@ -117,9 +274,10 @@
       align-items: center;
       margin-top: 1rem;
       padding: 1rem;
-      background: #fff3cd;
+      background: #ffffff;
       border-left: 5px solid #ffcc00;
       border-radius: 4px;
+            margin-top: 16px;
     }
 
     .highlight img {
@@ -127,77 +285,433 @@
       margin-right: 0.5rem;
     }
 
-    .hero-image {
-      flex: 1;
-      min-width: 300px;
+    /* Add hover effect to all buttons */
+    button,
+    .give-button,
+    .donate-form button {
+      transition: transform 0.2s; /* Smoothly animate the size change */
     }
 
-    .hero-image img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
+    button:hover,
+    .give-button:hover,
+    .donate-form button:hover {
+      transform: scale(1.1); /* Make the button 10% bigger on hover */
     }
 
-    @media (max-width: 768px) {
+    /* Add hover effect to header nav links and the Give button */
+    .header-right nav a,
+    .give-button {
+      transition: transform 0.2s; /* Smoothly animate the size change */
+    }
+
+    /* When you hover over a nav link or the Give button, it gets bigger */
+    .header-right nav a:hover,
+    .give-button:hover {
+      transform: scale(1.1); /* Make the button or link 10% bigger on hover */
+    }
+
+    /* Beginner-friendly responsive layout for mobile, tablet, and desktop */
+
+    /* MOBILE: less than 600px wide */
+    @media (max-width: 599px) {
+      /* Stack everything vertically */
       .hero {
         flex-direction: column;
+        padding: 1rem;
       }
-      .hero-text, .hero-image {
+      .hero-text {
+        width: 100%;
         padding-right: 0;
+        order: 1; /* Show text first */
+      }
+      
+      /* Hide desktop hero image on mobile */
+      .hero-image {
+        display: none;
+      }
+      
+      /* Show mobile hero image positioned after paragraph */
+      .hero-image-mobile {
+        display: block;
+        order: 2; /* Show image after donation form but before stats */
+        width: 100%;
+        margin: 1rem 0;
+        height: 250px; /* Fixed height for cropping */
+        overflow: hidden; /* Hide parts of image that don't fit */
+      }
+      
+      .hero-image-mobile img {
+        width: 100%;
+        height: 100%; /* Fill the full height */
+        object-fit: cover; /* Crop image to fill the area */
+        object-position: center; /* Focus crop on the center/glasses of water */
+      }
+      
+      /* Scale down header font on mobile */
+      .hero-text h1 {
+        font-size: 2.5rem !important; /* Smaller than desktop 4rem */
+      }
+      .stats {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        order: 3; /* Show stats after image */
+      }
+
+      /* Mobile specific adjustments */
+      header {
+        padding: 0.75rem 1rem;
+      }
+      
+      .header-right .give-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* TABLET: 600px–1024px */
+    @media (min-width: 600px) and (max-width: 1024px) {
+      .hero {
+        flex-direction: column;
+        padding: 2rem 1rem;
+      }
+      .hero-text {
+        width: 100%;
+        padding-right: 0;
+        order: 1; /* Show text first */
+      }
+      
+      /* Hide desktop hero image on tablet */
+      .hero-image {
+        display: none;
+      }
+      
+      /* Show mobile hero image positioned after paragraph */
+      .hero-image-mobile {
+        display: block;
+        order: 2; /* Show image after donation form but before stats */
+        width: 100%;
+        margin: 1rem 0;
+        height: 350px; /* Fixed height for cropping */
+        overflow: hidden; /* Hide parts of image that don't fit */
+      }
+      
+      .hero-image-mobile img {
+        width: 100%;
+        height: 100%; /* Fill the full height */
+        object-fit: cover; /* Crop image to fill the area */
+        object-position: center; /* Focus crop on the center/glasses of water */
+      }
+      
+      /* Scale down header font on tablet */
+      .hero-text h1 {
+        font-size: 3rem !important; /* Smaller than desktop 4rem */
+      }
+      .stats {
+        flex-direction: row;
+        gap: 1rem;
+        width: 100%;
+        justify-content: space-between;
+        order: 3; /* Show stats after image */
+      }
+      .stat-box,
+      .project-box {
+        width: 48%;
+        min-width: 200px;
+        max-width: 48%;
+      }
+    }
+
+    /* Responsive header layout for both mobile and tablet */
+    @media (max-width: 1024px) {
+      header {
+        padding: 1rem 1.5rem;
+      }
+      
+      /* Show hamburger menu button */
+      .menu-button {
+        display: block;
+        order: 1; /* Position on the left */
+      }
+      
+      /* Center the logo */
+      header > div:first-of-type {
+        order: 2;
+        flex: 1;
+        text-align: center;
+      }
+      
+      /* Hide desktop navigation */
+      .header-right nav {
+        display: none;
+      }
+      
+      /* Keep Give button visible but adjust layout */
+      .header-right {
+        order: 3;
+        margin-left: 0;
+      }
+      
+      .header-right .give-button {
+        margin-left: 0;
+      }
+    }
+
+    /* DESKTOP: more than 1024px wide */
+    @media (min-width: 1025px) {
+      .hero {
+        flex-direction: row;
+        padding: 2rem;
+        height: 70vh; /* Set a fixed height for the hero section */
+      }
+      
+      /* Hide mobile hero image on desktop */
+      .hero-image-mobile {
+        display: none;
+      }
+      
+      .hero-image {
+        order: 1;    /* Put image on the right */
+        flex: 1;     /* Take up exactly half the space */
+        min-width: 50%;
+        max-width: 50%;
+        margin-top: 0;
+        margin-bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .hero-image img {
+        width: 100%;
+        height: 100%; /* Fill the full height */
+        object-fit: cover; /* Fill the area while maintaining aspect ratio */
+      }
+      .hero-text {
+        flex: 1;     /* Take up exactly half the space */
+        min-width: 50%;
+        max-width: 50%;
+        padding-right: 2rem;
+      }
+      .stats {
+        flex-direction: row;
+        gap: 1rem;
+        margin-top: 16px;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <div><strong>Charity: Water</strong></div>
-    <nav>
+    <!-- Mobile menu button (hamburger) -->
+    <button class="menu-button" onclick="toggleMobileMenu()">☰</button>
+    
+    <!-- Logo image -->
+    <div>
+      <!-- The logo image for Charity: Water -->
+      <img src="img/cw_logo-2.png" alt="Charity: Water Logo" style="height: 40px;">
+    </div>
+    
+    <!-- Group nav and button together for right alignment -->
+    <div class="header-right">
+      <nav>
+        <!-- Underline added to nav links using a simple style -->
+        <a href="#">Take Action</a>
+        <a href="#">About Us</a>
+        <a href="#">Why Water</a>
+        <a href="#">Track Donations</a>
+      </nav>
+      <!-- Give button is not underlined -->
+      <button class="give-button">Give</button>
+    </div>
+    
+    <!-- Mobile navigation menu -->
+    <nav class="mobile-nav" id="mobileNav">
       <a href="#">Take Action</a>
       <a href="#">About Us</a>
       <a href="#">Why Water</a>
       <a href="#">Track Donations</a>
     </nav>
-    <button class="give-button">Give</button>
   </header>
-
+  <!-- Horizontal line below the header for separation -->
+  <hr style="margin: 0; border: 0; border-top: 2px solid #000000;">
   <section class="hero">
     <div class="hero-text">
-      <h1>Fund Clean Water, Follow Every Dollar</h1>
+      <h1 style="font-size: 4rem;">
+        Fund Clean Water, Follow Every Dollar
+      </h1>
       <p>100% of your donation funds clean water projects: track every dollar, follow every story, and be part of real, lasting change.</p>
-      <form class="donate-form">
-        <input type="text" placeholder="Fund Clean Water" />
-        <button type="submit">Donate</button>
-      </form>
+      
+      <!-- Hero image for mobile and tablet - positioned after paragraph -->
+      <div class="hero-image-mobile">
+        <img src="img/cleanwaterbetter.png" alt="Clean and dirty water held by happy Child" style="width: 100%; height: auto; object-fit: contain; border-radius: 8px;" />
+      </div>
+      
+      <!-- White box behind the text entry and donate button -->
+      <div 
+        style="
+          display: flex;                /* Use flexbox for layout */
+          align-items: center;          /* Center items vertically */
+          background: #fff; 
+          max-width: 950px;             /* Set your preferred max width */
+          width: 100%;                  /* Responsive: fills available space */
+          border-radius: 8px; 
+          box-shadow: 0 0 5px rgba(0,0,0,0.05); 
+          padding: 0 1rem; 
+          margin-bottom: 1.5rem;
+          min-width: 220px;             
+          height: 60.19px;              
+          justify-content: space-between; /* This aligns the button to the right */
+        "
+      >
+        <!-- Text entry box aligned left -->
+        <input 
+          type="text" 
+          placeholder="Enter donation amount" 
+          style="
+            flex: 1; 
+            padding: 0.5rem; 
+            border: 1px solid #ccc; 
+            border-radius: 4px; 
+            font-size: 1rem; 
+            max-width: 800px;
+            margin-right: 1rem;
+            background: #fff;
+          "
+        />
+        <!-- Donate button aligned right -->
+        <button 
+          type="submit" 
+          style="
+            background-color: #70b7ce;
+            color: white;
+            border: none;
+            padding: 0.5rem 2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+          "
+        >
+          Donate
+        </button>
+      </div>
 
       <div class="stats">
-        <div class="stat-box">
-          <p>1 Donation Yesterday</p>
-          <strong>$40</strong>
+        <!-- Stat box with donations -->
+        <div class="stat-box" style="display: flex; flex-direction: column;">
+          <!-- Title and "See All" button at the top -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <span><strong>Track Your Donations</strong></span>
+            <button style="background-color: #70b7ce; color: white; border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer;">
+              See All
+            </button>
+          </div>
+          <!-- First donation -->
+          <div style="display: flex; align-items: center;">
+            <!-- Water can image -->
+            <img src="img/water-can-transparent.png" alt="Water Can" style="width: 40px; height: 40px; margin-right: 10px;">
+            <!-- Donation info and amount side by side -->
+            <div style="display: flex; flex: 1;">
+              <!-- Donation number and time stacked vertically -->
+              <div>
+                <!-- Donation number -->
+                <p style="margin-bottom: 2px; margin-top: 0;">1 Donation</p>
+                <!-- Donation time -->
+                <span style="font-size: 0.95em; color: #555;">Yesterday</span>
+              </div>
+              <!-- Donation amount and arrow button, next to the info -->
+              <div style="display: flex; align-items: center; margin-left: auto;">
+                <strong>$40</strong>
+                <button style="margin-left: 5px;">→</button>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <!-- Second donation -->
+          <div style="display: flex; align-items: center;">
+            <img src="img/water-can-transparent.png" alt="Water Can" style="width: 40px; height: 40px; margin-right: 10px;">
+            <div style="display: flex; flex: 1;">
+              <div>
+                <p style="margin-bottom: 2px; margin-top: 0;">1 Donation</p>
+                <span style="font-size: 0.95em; color: #555;">7 days ago</span>
+              </div>
+              <div style="display: flex; align-items: center; margin-left: auto;">
+                <strong>$40</strong>
+                <button style="margin-left: 5px;">→</button>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <!-- Third donation -->
+          <div style="display: flex; align-items: center;">
+            <img src="img/water-can-transparent.png" alt="Water Can" style="width: 40px; height: 40px; margin-right: 10px;">
+            <div style="display: flex; flex: 1;">
+              <div>
+                <p style="margin-bottom: 2px; margin-top: 0;">1 Donation</p>
+                <span style="font-size: 0.95em; color: #555;">35 days ago</span>
+              </div>
+              <div style="display: flex; align-items: center; margin-left: auto;">
+                <strong>$40</strong>
+                <button style="margin-left: 5px;">→</button>
+              </div>
+            </div>
+          </div>
+          <hr>
         </div>
-        <div class="stat-box">
-          <p>1 Token Coin Yesterday</p>
-          <strong>$40</strong>
-        </div>
-        <div class="stat-box">
-          <p>1 Token Coin Yesterday</p>
-          <strong>$40</strong>
-        </div>
-        <div class="project-box">
-          <p>Project 21 of 22</p>
-          <img src="https://via.placeholder.com/50x70?text=Water" alt="Water Glass" />
-          <p><strong>$7668.55 of $10000</strong></p>
+        <div class="project-box" style="display: flex; flex-direction: column;">
+          <p><strong style="margin-bottom:16px; display:inline-block;"></strong>Project 21 of 22</p>
+          <img src="img/watercup.png" alt="Water Glass" />
+          <p><strong style="margin-top:16px; display:inline-block;">$7668.55 of $10000</strong></p>
+          
         </div>
       </div>
 
-      <div class="highlight">
-        <img src="https://cdn-icons-png.flaticon.com/512/2917/2917992.png" alt="icon" />
-        <span>It takes about $10,000 to fund one Clean Water Project. A $40 donation will provide clean water for 1 person.</span>
+      <div class="highlight" style="display: flex; align-items: center;">
+        <!-- Image section on the left, centered vertically -->
+        <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+          <img src="img/water-can-transparent.png" alt="icon" style="width: 60px; height: 60px; margin-right: 16px; display: block;" />
+        </div>
+        <!-- Text section on the right -->
+        <div style="flex: 1;">
+          <!-- First line of text -->
+          <div>It takes about $10,000 to fund one Clean Water Project.</div>
+          <!-- Horizontal line to separate sentences -->
+          <hr style="margin: 8px 0;">
+          <!-- Second line of text -->
+          <div>A $40 donation will provide clean water for 1 person.</div>
+        </div>
       </div>
     </div>
 
     <div class="hero-image">
-      <img src="https://via.placeholder.com/400x400?text=Child+with+Water" alt="Child with water" />
+      <!-- 
+        This image will fill the hero image space.
+        We use width: 100% and height: 100% in the style below.
+        object-fit: cover makes sure the image fills the area without stretching.
+      -->
+      <img src="img/cleanwaterbetter.png" alt="Clean and dirty water held by happy Child" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" />
     </div>
   </section>
+
+  <!-- JavaScript for mobile menu toggle -->
+  <script>
+    function toggleMobileMenu() {
+      // Get the mobile navigation menu
+      const mobileNav = document.getElementById('mobileNav');
+      
+      // Toggle the 'active' class to show/hide the menu
+      mobileNav.classList.toggle('active');
+    }
+    
+    // Close mobile menu when clicking on a link
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+      mobileNavLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+          document.getElementById('mobileNav').classList.remove('active');
+        });
+      });
+    });
+  </script>
 </body>
 </html>
