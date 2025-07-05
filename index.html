@@ -1,47 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charity Water Landing Page</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charity: Water</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      background-color: #f8f9fa;
+      color: #222;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      background: white;
+      border-bottom: 1px solid #ddd;
+    }
+
+    header nav a {
+      margin: 0 1rem;
+      text-decoration: none;
+      color: #222;
+      font-weight: 500;
+    }
+
+    header .give-button {
+      background-color: #b7dbe8;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 2rem;
+      background-color: #e0e7eb;
+    }
+
+    .hero-text {
+      flex: 1;
+      min-width: 300px;
+      padding-right: 2rem;
+    }
+
+    .hero-text h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .hero-text p {
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      color: #444;
+    }
+
+    .donate-form input[type="text"] {
+      padding: 0.5rem;
+      width: 70%;
+      margin-right: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .donate-form button {
+      background-color: #70b7ce;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+      gap: 1rem;
+    }
+
+    .stat-box {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.05);
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .project-box {
+      text-align: center;
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.05);
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .highlight {
+      display: flex;
+      align-items: center;
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #fff3cd;
+      border-left: 5px solid #ffcc00;
+      border-radius: 4px;
+    }
+
+    .highlight img {
+      width: 24px;
+      margin-right: 0.5rem;
+    }
+
+    .hero-image {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+      }
+      .hero-text, .hero-image {
+        padding-right: 0;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Hero Section: This is the main banner at the top of the page -->
-    <section class="hero">
-        <!-- Main headline -->
-        <h1>Clean Water for Everyone</h1>
-        <!-- Subheadline -->
-        <p>Join us in bringing safe, clean water to communities in need.</p>
-    </section>
+  <header>
+    <div><strong>Charity: Water</strong></div>
+    <nav>
+      <a href="#">Take Action</a>
+      <a href="#">About Us</a>
+      <a href="#">Why Water</a>
+      <a href="#">Track Donations</a>
+    </nav>
+    <button class="give-button">Give</button>
+  </header>
 
-    <!-- Story Section: This tells the story of the nonprofit -->
-    <section class="story">
-        <h2>Our Story</h2>
-        <p>
-         
-    </section>
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Fund Clean Water, Follow Every Dollar</h1>
+      <p>100% of your donation funds clean water projects: track every dollar, follow every story, and be part of real, lasting change.</p>
+      <form class="donate-form">
+        <input type="text" placeholder="Fund Clean Water" />
+        <button type="submit">Donate</button>
+      </form>
 
-    <!-- Real-World Impact Story Section -->
-    <section class="impact-story">
-        <!-- Section headline -->
-        <h2>Real Impact: Meet Amina</h2>
-        <!-- Container for image and text -->
-        <div class="impact-content">
-            <!-- Impact image -->
-            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Amina smiling with clean water" class="impact-image">
-            <!-- Impact story text -->
-            <p>
-                Amina used to walk miles every day to collect water for her family. Thanks to your support, her village now has a clean water well. Amina can go to school and her family is healthier and happier.
-            </p>
+      <div class="stats">
+        <div class="stat-box">
+          <p>1 Donation Yesterday</p>
+          <strong>$40</strong>
         </div>
-    </section>
+        <div class="stat-box">
+          <p>1 Token Coin Yesterday</p>
+          <strong>$40</strong>
+        </div>
+        <div class="stat-box">
+          <p>1 Token Coin Yesterday</p>
+          <strong>$40</strong>
+        </div>
+        <div class="project-box">
+          <p>Project 21 of 22</p>
+          <img src="https://via.placeholder.com/50x70?text=Water" alt="Water Glass" />
+          <p><strong>$7668.55 of $10000</strong></p>
+        </div>
+      </div>
 
-    <!-- Call-to-Action Section: This encourages visitors to take action -->
-    <section class="call-to-action">
-        <h2>Make a Difference</h2>
-        <p>Your support can help save lives. Every donation brings us closer to a world with clean water for all.</p>
-        <a href="#" class="donate-button">Donate Now</a>
-    </section>
+      <div class="highlight">
+        <img src="https://cdn-icons-png.flaticon.com/512/2917/2917992.png" alt="icon" />
+        <span>It takes about $10,000 to fund one Clean Water Project. A $40 donation will provide clean water for 1 person.</span>
+      </div>
+    </div>
+
+    <div class="hero-image">
+      <img src="https://via.placeholder.com/400x400?text=Child+with+Water" alt="Child with water" />
+    </div>
+  </section>
 </body>
 </html>
